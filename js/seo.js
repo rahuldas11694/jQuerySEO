@@ -1,4 +1,4 @@
-<script type="text/javascript" language="javascript">
+
 function load()
 {
 
@@ -19,6 +19,7 @@ xhr.onreadystatechange = function() {
    {
       // Parse the JSON
       var jsonObj = JSON.parse(xhr.responseText);
+          dataList.innerHTML= "";
 
       // Loop over the JSON array.
                for(var obj in jsonObj.Search) {
@@ -51,4 +52,4 @@ input.placeholder = "Loading options...";
 xhr.send();
 
 }
-</script>
+

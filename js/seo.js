@@ -1,6 +1,50 @@
+/*following code is  returning null value because it executes before the DOM fully loads. 
+you need to put this code under window.onload=function(){ -- put your code here } 
+Then it will run without any eoor
+*/
 
-function load()
+
+
+/*
+var ax=document.getElementById("ajax");     
+if(ax)
 {
+  ax.addEventListener("keyup",load,false);
+}
+else
+{
+  window.alert("ID not found");
+}*/
+
+
+
+//window.addEventListener("keyup",load);      //only using this it also works
+
+
+
+//   document.getElementById("ajax").addEventListener("keyup",load);
+
+
+// window.onload=function() // use this to execute the following code without an error
+// {
+
+
+document.getElementById("ajax").addEventListener("keyup",load,false);
+
+
+
+
+// }
+
+  function load(event)
+{
+    var key = event.keyCode;
+     console.log(key);
+
+     if(key==37 || key==38 || key==39 || key==40)
+      return;
+
+
 
      var dataList = document.getElementById("json-datalist");
      var input = document.getElementById("ajax");

@@ -129,12 +129,109 @@ word-wrap: break-word;
 
 
 
+#newUl
+{
+
+list-style-type: none;
+
+margin-right: 20%;
+font-family: serif;
+
+}
+
+.searchopts
+{
+	padding: 3px;
+    font-size: 19px;
+
+}
+li.searchopts:hover
+{
+
+	background-color: #efefef;
+}
+
+#info
+{
+
+display: none;
+}
+
+.info-class
+{
+	 font-size: 2em;
+	 padding: 6px;
+}
+
+.info-ul
+{
+display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    list-style: none;
+    width: 56%;
+
+}
+/*.title-class
+{
+
+float: right;
+margin-right: 600px;
+}
+
+.year-class
+{
+
+    float: right;
+    margin-top: 49px;
+    margin-right: -95px;
+
+}
+
+.rated-class
+{
+
+    float: right;
+    margin-top: 96px;
+    margin-right: -117px;
+}
+
+
+.rating-class
+{
+    position: relative;
+    top: 24px;
+    left: 14px;
+}
+
+.plot-class
+{
+position: relative;
+    top: 30px;
+    left: 14px;
+}
+
+#plot
+{
+    position: relative;
+    left: 7%;
+    font-size: 2em;
+    top:-7px;
+
+}
 
 
 
 
+}*/
 
 
+#poster
+{
+width:18%;
+
+
+}
 
 
 

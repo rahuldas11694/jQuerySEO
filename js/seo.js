@@ -35,32 +35,72 @@ document.getElementById("ajax").addEventListener("keyup", load, false);
 
 
 // }
-
+var counter =1;
 function load(event) {
+   
+
+    var i, j,k,l,m;
+    
     var key = event.keyCode;
-     console.log(key);
+     //console.log(key);
 
-    if (key == 37 || key == 38 || key == 39 || key == 40)
+    if (key == 37 || key == 39 || key == 32)
+    return;
+
+if(document.getElementsByTagName("type").value==null && key==40)
+  return;
+
+
+
+    if(key == 40 ){
+      var ul_child = document.getElementById("newUl").childNodes;
+      console.log(ul_child);
+         
+         if( ul_child != null){
+          var liID= ul_child[counter].id;
+
+          console.log("li ID",liID);
+         document.getElementById(liID).style.backgroundColor="white";
+         console.log(document.getElementById(liID));
+         counter++;
+
+          for(var i = 0 ; i<counter; i++)
+          {
+          console.log("for loop executing");
+
+
+            document.getElementById(ul_child[counter].id).style.backgroundColor = "#efefef";
+          }
+
+         if (counter==ul_child.length)
+         {
+          counter=1; 
+          
+         }
+       // if(key)
         return;
-    var incrKey=0;
-     if(key == 38)
-     {
-      incrKey-=1;
+       }
+        
+      
     }
-    else if(key == 40)
-    {
-      incrKey+=1;
-    }
-    console.log(incrKey);
+
+
+if(key==13)
+{
+ doStuff_for_li();
+
+}
+
+
+
+
     
+   //var dataList = document.getElementById("json-datalist");
 
-
-
-    
-
-    //var dataList = document.getElementById("json-datalist");
     var input = document.getElementById("ajax");
+
     // store the data in input then create url then fire ajax
+
     var text = document.getElementById("ajax").value;
    //console.log(text);
 
@@ -75,15 +115,19 @@ function load(event) {
     xhr.onreadystatechange = function() {
         if ((xhr.readyState) == 4 && (xhr.status == 200)) {
             // Parse the JSON
-            var demo=document.getElementsByTagName("li");
-
-            console.log("hello",demo[3]);
             
 
+           // console.log("hello",demo[3]);
+            
+            
 
             var jsonObj = JSON.parse(xhr.responseText);
 
-            console.log(incrKey);
+             //var SearchLength = jsonObj.Search.length;
+             //console.log(obj);
+            //var demo=document.getElementsByTagName("li");
+           // keys(demo,event);
+            
 
             document.getElementById("newUl").innerHTML = " ";
 
@@ -98,15 +142,61 @@ function load(event) {
        
                   var newUl = document.getElementsByTagName("ul");
 
+                 // var newUl = document.getElementsById("ul");     not working
+
                   //newLi.addEventListener("click",doStuff,false); on line no 88
                   
-                  newLi.setAttribute("class","searchopts");
+                  newLi.setAttribute("class","searchopts list");
 
                   newLi.addEventListener("click",doStuff,false);
+                  // keys(event);
 
-                  newUl[0].appendChild(newLi); 
+                  newUl[0].appendChild(newLi);           
+                  //newUl.appendChild(newLi);                  not working
+                   
 
             }
+
+
+
+/*
+var parent = child.parentNode;
+var children = parent.children;
+var count = children.length;
+console.log("children",count)
+var child_index;
+for (var i = 0; i < count; i++) {
+  if (child === children[i]) {
+    child_index = i;
+    break;
+  }
+} 
+
+/*var i=0
+var obj =jsonObj.Search[i];
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // Update the placeholder text.
 
             if (input.placeholder == "Search...") {
@@ -119,6 +209,26 @@ function load(event) {
     }; // onreadystate change = function() closed here line no:  61
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Update the placeholder text.
     input.placeholder = "Loading options...";
 
@@ -128,18 +238,30 @@ function load(event) {
 
 }
 
+function doStuff_for_li()
+{
+console.log("doStuff_for_li is executing");
+
+
+}
+
+
+
 
 
 
 
 function doStuff(event)
 {
+
   console.log("li getting clicked",event.target.innerHTML);
   //document.getElementById("mvid").innerHTML=event.target.innerHTML;
   document.getElementById("ajax").value=event.target.innerHTML; // or .innerText
  
    //console.log(mvid); 
-    
+
+   
+
     var mvid= event.target.id;
     
     console.log(mvid); 
@@ -155,7 +277,7 @@ function doStuff(event)
             // Parse the JSON
             var jsonID = JSON.parse(xml.responseText);
 
-            console.log("info",jsonID);
+            //console.log("info",jsonID);
 
 
             document.getElementById("newUl").innerHTML = " ";
@@ -181,11 +303,20 @@ function doStuff(event)
         };
         xml.send();
       }
+    
 
 
 
 
+/*function keys(demo ,event)
+{ 
 
+
+  console.log(demo[2])
+var key = event.keyCode;
+    if (key == 38 || key == 40)
+    console.log("UpDownkeys executed");
+}*/
  
 
 

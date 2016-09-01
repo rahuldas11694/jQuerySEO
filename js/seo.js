@@ -86,9 +86,14 @@ function load(event) {
      }
      */
 
-if(key == 40){
 
-      var ul_child = document.getElementById("newUl").childNodes;
+
+if(key == 40 || key == 38){
+
+  var ul_child = document.getElementById("newUl").childNodes;
+  if (key==40)
+    {
+    //var ul_child = document.getElementById("newUl").childNodes;
       //console.log(ul_child);
          
          if( ul_child != null)
@@ -124,6 +129,7 @@ if(key == 40){
           
          }*/
          counter++;
+         console.log("key 40 counter",counter);
        // if(key)
        //console.log(counter);
 
@@ -133,11 +139,58 @@ if(key == 40){
        }
         
     }
+
+
+    if (key==38)
+    {    
+
+      
+
+    console.log("key 38 counter",counter);
+        //document.getElementsById(liID).style.backgroundColor="red";
+
+           counter=counter-1;
+var liID= ul_child[counter].id;
+          var liText= ul_child[counter].innerHTML;
+          
+             
+          console.log("key pressed 38 ",liID,liText);
+
+        // document.getElementById(liID).style.backgroundColor="red";
+
+          
+          for(var i = 0 ; i<counter; i++) 
+
+          {
+          console.log("key for 38 for loop executing");
+
+
+            document.getElementById(ul_child[counter].id).style.backgroundColor = "white";
+
+          }
+          document.getElementById(ul_child[counter-1].id).style.backgroundColor="#efefef";
+
+
+      //counter= counter-1;
+      if(counter==2 )
+            {
+              counter=ul_child.length-1;
+            }
+
+
+    return;
+    }
+
+
+}
+
+
  if(key==13)
 {
 
   console.log("key 13 counter",counter);
  doStuff_for_li(counter);
+ return;
 
 }
 
@@ -180,6 +233,7 @@ if(key == 40){
         if ((xhr.readyState) == 4 && (xhr.status == 200)) {
             // Parse the JSON
             
+            document.getElementById("newUl").innerHTML = " ";
            // console.log("hello",demo[3]);            
             var jsonObj = JSON.parse(xhr.responseText);
 
@@ -189,7 +243,6 @@ if(key == 40){
            // keys(demo,event);
             
 
-            document.getElementById("newUl").innerHTML = " ";
 
             //for  Loop over the JSON array. 
             for (var obj in jsonObj.Search) 
@@ -249,6 +302,7 @@ var liID= ul_child[counter-1].id;
 console.log("dostuff for liID ===",liID);
 
 //document.getElementsById("ajax").value=liID;  type error: not a fun: i dnt understand it why.
+document.getElementById("newUl").innerHTML = " ";
 
 var xmlr=new XMLHttpRequest();
 xmlr.open("GET", "http://www.omdbapi.com/?i="+liID,true);
@@ -256,7 +310,6 @@ xmlr.onreadystatechange=function(){
 if ((xmlr.readyState) == 4 && (xmlr.status == 200)) {
 var jsonID=JSON.parse(xmlr.responseText);
 
-document.getElementById("newUl").innerHTML = " ";
 
             //for  Loop over the JSON array. 
            for (var obj in jsonID) 

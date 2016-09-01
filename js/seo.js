@@ -47,55 +47,122 @@ function load(event) {
     if (key == 37 || key == 39 || key == 32)
     return;
 
-if(document.getElementsByTagName("type").value==null && key==40)
+/*if(document.getElementsByTagName("type").value==null & key==40)
+{
   return;
+}
+*/
 
-
-
-    if(key == 40 ){
+/*if(key == 40)
+      {
+     //console.log(key);
       var ul_child = document.getElementById("newUl").childNodes;
-      console.log(ul_child);
+      console.log("length is",ul_child.length,ul_child);
          
          if( ul_child != null){
           var liID= ul_child[counter].id;
 
           console.log("li ID",liID);
-         document.getElementById(liID).style.backgroundColor="white";
+         
+         document.getElementById(liID).style.backgroundColor="#efefef";
          console.log(document.getElementById(liID));
          counter++;
-
-          for(var i = 0 ; i<counter; i++)
+         
+         for(var i =1 ; i<counter; i++)
           {
           console.log("for loop executing");
-
-
-            document.getElementById(ul_child[counter].id).style.backgroundColor = "#efefef";
+          document.getElementById(ul_child[i].id).style.backgroundColor = "white";
           }
-
+        
          if (counter==ul_child.length)
          {
-          counter=1; 
+          counter=1;
+
           
          }
        // if(key)
         return;
        }
+     }
+     */
+
+if(key == 40){
+
+      var ul_child = document.getElementById("newUl").childNodes;
+      //console.log(ul_child);
+         
+         if( ul_child != null)
+         {
+          if(counter==ul_child.length)
+          {
+          counter=1;
+          }
+          
+          var liID= ul_child[counter].id;
+          var liText= ul_child[counter].innerHTML;
+             
+          //console.log("li ID and text",liID,liText);
+
+         document.getElementById(liID).style.backgroundColor="#efefef";
+
+         console.log(document.getElementById(liID));
+         //counter++;
+
+
+
+          for(var i = 1 ; i<counter; i++)
+          {
+          console.log("for loop executing");
+
+
+            document.getElementById(ul_child[i].id).style.backgroundColor = "white";
+          }
+
+         /*if (counter==ul_child.length) //on line no 96 
+         {
+          counter=1; 
+          
+         }*/
+         counter++;
+       // if(key)
+       //console.log(counter);
+
+
+
+        return;
+       }
         
-      
     }
-
-
-if(key==13)
+ if(key==13)
 {
- doStuff_for_li();
+
+  console.log("key 13 counter",counter);
+ doStuff_for_li(counter);
 
 }
 
 
-
-
+        
+      
     
-   //var dataList = document.getElementById("json-datalist");
+ /* if(key == 38)
+  {   
+    console.log("up key pressed", counter);
+      if(counter==1)
+      {
+        counter=ul_child.length;
+
+        console.log("seted the value counter after pressing 38",counter);
+      }
+    document.getElementsById(ul_child[counter].id).style.backgroundColor="#efefef";
+    counter--;
+    console.log(counter);
+
+
+  }*/
+
+
+  //var dataList = document.getElementById("json-datalist");
 
     var input = document.getElementById("ajax");
 
@@ -103,9 +170,6 @@ if(key==13)
 
     var text = document.getElementById("ajax").value;
    //console.log(text);
-
-
-
     // Create a new XMLHttpRequest.
     var xhr = new XMLHttpRequest();
     // dynamic searchhhhhhh
@@ -116,11 +180,7 @@ if(key==13)
         if ((xhr.readyState) == 4 && (xhr.status == 200)) {
             // Parse the JSON
             
-
-           // console.log("hello",demo[3]);
-            
-            
-
+           // console.log("hello",demo[3]);            
             var jsonObj = JSON.parse(xhr.responseText);
 
              //var SearchLength = jsonObj.Search.length;
@@ -157,46 +217,6 @@ if(key==13)
 
             }
 
-
-
-/*
-var parent = child.parentNode;
-var children = parent.children;
-var count = children.length;
-console.log("children",count)
-var child_index;
-for (var i = 0; i < count; i++) {
-  if (child === children[i]) {
-    child_index = i;
-    break;
-  }
-} 
-
-/*var i=0
-var obj =jsonObj.Search[i];
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             // Update the placeholder text.
 
             if (input.placeholder == "Search...") {
@@ -209,26 +229,6 @@ var obj =jsonObj.Search[i];
     }; // onreadystate change = function() closed here line no:  61
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Update the placeholder text.
     input.placeholder = "Loading options...";
 
@@ -238,17 +238,46 @@ var obj =jsonObj.Search[i];
 
 }
 
-function doStuff_for_li()
+/********* doStuff_for_li******/
+
+function doStuff_for_li(counter)
 {
-console.log("doStuff_for_li is executing");
+console.log("doStuff_for_li is executing",counter);
+var ul_child = document.getElementById("newUl").childNodes;
+console.log(ul_child);
+var liID= ul_child[counter-1].id;
+console.log("dostuff for liID ===",liID);
 
+//document.getElementsById("ajax").value=liID;  type error: not a fun: i dnt understand it why.
 
+var xmlr=new XMLHttpRequest();
+xmlr.open("GET", "http://www.omdbapi.com/?i="+liID,true);
+xmlr.onreadystatechange=function(){
+if ((xmlr.readyState) == 4 && (xmlr.status == 200)) {
+var jsonID=JSON.parse(xmlr.responseText);
+
+document.getElementById("newUl").innerHTML = " ";
+
+            //for  Loop over the JSON array. 
+           for (var obj in jsonID) 
+            {
+                 console.log("inside for Loop",obj);
+
+                  
+                 document.getElementById("poster").src=jsonID.Poster; 
+                 document.getElementById("title").innerHTML=jsonID.Title;
+                 document.getElementById("year").innerHTML=jsonID.Year;
+                 document.getElementById("rated").innerHTML=jsonID.Rated;
+                 document.getElementById("rating").innerHTML=jsonID.imdbRating;
+                 document.getElementById("plot").innerHTML=jsonID.Plot;
+
+                
+            }
+            document.getElementById("info").style.display="block";
+          }
+        };
+        xmlr.send();
 }
-
-
-
-
-
 
 
 function doStuff(event)
@@ -308,15 +337,6 @@ function doStuff(event)
 
 
 
-/*function keys(demo ,event)
-{ 
-
-
-  console.log(demo[2])
-var key = event.keyCode;
-    if (key == 38 || key == 40)
-    console.log("UpDownkeys executed");
-}*/
  
 
 

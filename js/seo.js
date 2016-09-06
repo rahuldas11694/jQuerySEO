@@ -30,6 +30,9 @@ else
 
 
 document.getElementById("ajax").addEventListener("keyup", load, false);
+   
+
+
 
 
 
@@ -37,7 +40,10 @@ document.getElementById("ajax").addEventListener("keyup", load, false);
 // }
 var counter =1;
 function load(event) {
-    
+
+  // alert(2233);
+
+   //document.getElementById("load1").style.visibility="visible"; 
 
     var i, j,k,l,m;
     
@@ -45,64 +51,32 @@ function load(event) {
      console.log(key);
 
     if (key == 37 || key == 39 || key == 32)
+
     return;
 
-if (key ==8)
-{
+  if (key ==8)
+  {
 
-document.getElementById("info").style.display="none";
+  document.getElementById("info").style.display="none";
 
-}
+  }
 
 
-/*if(document.getElementsByTagName("type").value==null & key==40)
+if(document.getElementsByTagName("type").value==null && (key==40 || key==38) )
 {
   return;
 }
-*/
 
-/*if(key == 40)
-      {
-     //console.log(key);
-      var ul_child = document.getElementById("newUl").childNodes;
-      console.log("length is",ul_child.length,ul_child);
-         
-         if( ul_child != null){
-          var liID= ul_child[counter].id;
+else{
 
-          console.log("li ID",liID);
-         
-         document.getElementById(liID).style.backgroundColor="#efefef";
-         console.log(document.getElementById(liID));
-         counter++;
-         
-         for(var i =1 ; i<counter; i++)
-          {
-          console.log("for loop executing");
-          document.getElementById(ul_child[i].id).style.backgroundColor = "white";
-          }
-        
-         if (counter==ul_child.length)
-         {
-          counter=1;
+  if(key == 40 || key == 38){
+  console.log("***************************************"+ key);
 
-          
-         }
-       // if(key)
-        return;
-       }
-     }
-     */
-
-
-
-if(key == 40 || key == 38){
-
-  var ul_child = document.getElementById("newUl").childNodes;
-
+  
+  
   if (key==40)
     {
-    //var ul_child = document.getElementById("newUl").childNodes;
+    var ul_child = document.getElementById("newUl").childNodes;
       //console.log(ul_child);
          
          if( ul_child != null)
@@ -111,17 +85,22 @@ if(key == 40 || key == 38){
           {
           counter=1;
           }
+
           
+           
+           
           var liID= ul_child[counter].id;
           var liText= ul_child[counter].innerHTML;
-             
+            
           //console.log("li ID and text",liID,liText);
 
+
+              
          document.getElementById(liID).style.backgroundColor="#efefef";
 
          console.log(document.getElementById(liID));
          //counter++;
-
+         document.getElementById("ajax").value = liText;
 
 
           for(var i = 1 ; i<counter; i++)
@@ -141,10 +120,7 @@ if(key == 40 || key == 38){
          console.log("key 40 counter",counter);
        // if(key)
        //console.log(counter);
-
-
-
-        return;
+       return;
        }
         
     }
@@ -166,18 +142,19 @@ if(key == 40 || key == 38){
         //document.getElementsById(liID).style.backgroundColor="red";
 
            counter=counter-1;
-var liID= ul_child[counter].id;
+          var liID= ul_child[counter].id;
           var liText= ul_child[counter].innerHTML;
           
              
           console.log("key pressed 38 ",liID,liText);
 
         // document.getElementById(liID).style.backgroundColor="red";
-
+         
           
           for(var i = 0 ; i<counter; i++) 
 
           {
+
           console.log("key for 38 for loop executing");
 
 
@@ -187,6 +164,11 @@ var liID= ul_child[counter].id;
 
 
           document.getElementById(ul_child[counter-1].id).style.backgroundColor="#efefef";
+
+
+          console.log("nabdahjnzmcbzgcjhajdabh m",counter)
+            text=ul_child[counter-1].innerHTML;
+          document.getElementById("ajax").value = text;
 
 
       //counter= counter-1;
@@ -200,6 +182,7 @@ var liID= ul_child[counter].id;
     return;
     }
 
+}
 }
 
 
@@ -235,36 +218,44 @@ var liID= ul_child[counter].id;
   }*/
 
 
-  //var dataList = document.getElementById("json-datalist");
 
+
+   
+  //var dataList = document.getElementById("json-datalist");
+   
     var input = document.getElementById("ajax");
 
     // store the data in input then create url then fire ajax
-
+    
     var text = document.getElementById("ajax").value;
    //console.log(text);
     // Create a new XMLHttpRequest.
+
     var xhr = new XMLHttpRequest();
+
     // dynamic searchhhhhhh
     xhr.open("GET", "http://www.omdbapi.com/?s=" + text, true);
 
-    // Handle state changes for the request.
+   xhr.send();
+
+    document.getElementById("load").removeAttribute("class") ;
+    
+
+    // Handle state changes for the request
     xhr.onreadystatechange = function() {
+
         if ((xhr.readyState) == 4 && (xhr.status == 200)) {
             // Parse the JSON
+            document.getElementById("load").setAttribute("class", "hidden");
             
             document.getElementById("newUl").innerHTML = " ";
            // console.log("hello",demo[3]);            
             var jsonObj = JSON.parse(xhr.responseText);
 
-             //var SearchLength = jsonObj.Search.length;
-             //console.log(obj);
-            //var demo=document.getElementsByTagName("li");
-           // keys(demo,event);
-            
+
+          //for  Loop over the JSON array. 
 
 
-            //for  Loop over the JSON array. 
             for (var obj in jsonObj.Search) 
             {
                   var newLi = document.createElement("li");
@@ -281,7 +272,9 @@ var liID= ul_child[counter].id;
                   
                   newLi.setAttribute("class","searchopts list");
 
-                  newLi.addEventListener("click",doStuff,false);
+ 
+                 
+                  newLi.addEventListener("click",doStuff,true);
                   // keys(event);
 
                   newUl[0].appendChild(newLi);           
@@ -290,10 +283,12 @@ var liID= ul_child[counter].id;
 
             }
 
+
+/*******************************/
             // Update the placeholder text.
 
             if (input.placeholder == "Search...") {
-                input.placeholder = "Movie...";
+                input.placeholder = "Search...";
             } else {
                 // An error occured :(
                 input.placeholder = "Search...";
@@ -303,11 +298,14 @@ var liID= ul_child[counter].id;
 
 
     // Update the placeholder text.
-    input.placeholder = "Loading options...";
+    input.placeholder = "Search...";
 
     // Set up and make the request.
 
-    xhr.send();
+    //xhr.send();
+
+//
+
 
 }
 
@@ -315,17 +313,151 @@ var liID= ul_child[counter].id;
 
 function doStuff_for_li(counter)
 {
+
+
+ // document.getElementById("load1").style.visibility="visible"; 
+
+
+
+
 console.log("doStuff_for_li is executing",counter);
 var ul_child = document.getElementById("newUl").childNodes;
 console.log(ul_child);
 var liID= ul_child[counter-1].id;
 console.log("dostuff for liID ===",liID);
 
-//document.getElementsById("ajax").value=liID;  type error: not a fun: i dnt understand it why.
 document.getElementById("newUl").innerHTML = " ";
 
 var xmlr=new XMLHttpRequest();
 xmlr.open("GET", "http://www.omdbapi.com/?i="+liID,true);
+
+document.getElementById("load1").removeAttribute("class");
+
+xmlr.onreadystatechange=function(){
+if ((xmlr.readyState) == 4 && (xmlr.status == 200)) {
+  document.getElementById("load1").setAttribute("class", "hidden1");
+var jsonID=JSON.parse(xmlr.responseText);
+
+
+
+           // setTimeout(function(){
+            //  document.getElementById("load1").style.visibility="visible";
+             //             },5000);
+
+
+            //for  Loop over the JSON array. 
+           for (var obj in jsonID) 
+            {
+                 console.log("inside for Loop",obj);
+                  
+                 document.getElementById("poster").src=jsonID.Poster; 
+                 document.getElementById("title").innerHTML=jsonID.Title;
+                 document.getElementById("year").innerHTML=jsonID.Year;
+                 document.getElementById("rated").innerHTML=jsonID.Rated;
+                 document.getElementById("rating").innerHTML=jsonID.imdbRating;
+                 document.getElementById("plot").innerHTML=jsonID.Plot;
+
+                
+            }
+            document.getElementById("info").style.display="block";
+          }
+        };
+        xmlr.send();
+
+
+        //document.getElementById("load1").style.visibility="visible";
+
+}
+
+
+function doStuff()
+{
+  
+
+
+
+  console.log("li getting clicked",event.target.innerHTML);
+  //document.getElementById("mvid").innerHTML=event.target.innerHTML;
+  document.getElementById("ajax").value=event.target.innerHTML; // or .innerText
+ 
+   //console.log(mvid); 
+
+    var mvid= event.target.id;
+    
+    console.log(mvid); 
+
+    //Create a new XMLHttpRequest.
+    var xml = new XMLHttpRequest();
+    // dynamic searchhhhhhh
+    xml.open("GET", "http://www.omdbapi.com/?i="+mvid, true);
+
+    document.getElementById("load1").removeAttribute("class");
+
+    // Handle state changes for the request.1
+    xml.onreadystatechange = function() {
+
+         //document.getElementById("load1").display="none";
+
+
+        if ((xml.readyState) == 4 && (xml.status == 200)) {
+          
+
+          document.getElementById("load1").setAttribute("class", "hidden1");
+            // Parse the JSON
+            var jsonID = JSON.parse(xml.responseText);
+            
+            document.getElementById("newUl").innerHTML = " ";
+
+            //for  Loop over the JSON array. 
+           for (var obj in jsonID) 
+            {
+
+                 console.log("inside for Loop",obj);
+
+                  
+                 document.getElementById("poster").src=jsonID.Poster; 
+                 document.getElementById("title").innerHTML=jsonID.Title;
+                 document.getElementById("year").innerHTML=jsonID.Year;
+                 document.getElementById("rated").innerHTML=jsonID.Rated;
+                 document.getElementById("rating").innerHTML=jsonID.imdbRating;
+                 document.getElementById("plot").innerHTML=jsonID.Plot;
+            }
+            document.getElementById("info").style.display="block";
+          }
+        };
+        xml.send();
+      }
+function req_for_btn()
+      {
+
+      console.log("SEARCH BUTTON PRESSED");
+      var input = document.getElementById("ajax");
+      console.log(input);
+      var text = document.getElementById("ajax").value;
+      console.log(text);
+      var xhr = new XMLHttpRequest();
+    // dynamic searchhhhhhh
+    xhr.open("GET", "http://www.omdbapi.com/?s=" + text, true);
+   
+   document.getElementById("load1").removeAttribute("class");
+    // Handle state changes for the request.
+    xhr.onreadystatechange = function() {
+        if ((xhr.readyState) == 4 && (xhr.status == 200)) {
+
+          document.getElementById("load1").setAttribute("class","hidden1");
+            // Parse the JSON
+            
+            document.getElementById("newUl").innerHTML = " ";
+           // console.log("hello",demo[3]);            
+            var jsonObj = JSON.parse(xhr.responseText);
+            console.log(jsonObj);
+            
+    
+            var btn_id=jsonObj.Search[0].imdbID;
+            console.log("ID WHEN BUTTON CLICKED",jsonObj.Search[0].imdbID,jsonObj.Search[0].Title);            
+
+          var xmlr=new XMLHttpRequest();
+xmlr.open("GET", "http://www.omdbapi.com/?i="+btn_id,true);
 xmlr.onreadystatechange=function(){
 if ((xmlr.readyState) == 4 && (xmlr.status == 200)) {
 var jsonID=JSON.parse(xmlr.responseText);
@@ -334,7 +466,7 @@ var jsonID=JSON.parse(xmlr.responseText);
             //for  Loop over the JSON array. 
            for (var obj in jsonID) 
             {
-                 console.log("inside for Loop",obj);
+                 console.log("BUTTON CLICKED",obj);
 
                   
                  document.getElementById("poster").src=jsonID.Poster; 
@@ -352,101 +484,10 @@ var jsonID=JSON.parse(xmlr.responseText);
         xmlr.send();
 }
 
+};
 
-function doStuff(event)
-{
+xhr.send();
 
-  console.log("li getting clicked",event.target.innerHTML);
-  //document.getElementById("mvid").innerHTML=event.target.innerHTML;
-  document.getElementById("ajax").value=event.target.innerHTML; // or .innerText
- 
-   //console.log(mvid); 
-
-   
-
-    var mvid= event.target.id;
-    
-    console.log(mvid); 
-
-    //Create a new XMLHttpRequest.
-    var xml = new XMLHttpRequest();
-    // dynamic searchhhhhhh
-    xml.open("GET", "http://www.omdbapi.com/?i="+mvid, true);
-
-    // Handle state changes for the request.1
-    xml.onreadystatechange = function() {
-        if ((xml.readyState) == 4 && (xml.status == 200)) {
-            // Parse the JSON
-            var jsonID = JSON.parse(xml.responseText);
-
-            //console.log("info",jsonID);
-
-
-            document.getElementById("newUl").innerHTML = " ";
-
-            //for  Loop over the JSON array. 
-           for (var obj in jsonID) 
-            {
-                 console.log("inside for Loop",obj);
-                  
-                 document.getElementById("poster").src=jsonID.Poster; 
-                 document.getElementById("title").innerHTML=jsonID.Title;
-                 document.getElementById("year").innerHTML=jsonID.Year;
-                 document.getElementById("rated").innerHTML=jsonID.Rated;
-                 document.getElementById("rating").innerHTML=jsonID.imdbRating;
-                 document.getElementById("plot").innerHTML=jsonID.Plot;
-
-                
-            }
-            document.getElementById("info").style.display="block";
-
-
-          }
-        };
-        xml.send();
-      }
-    
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 

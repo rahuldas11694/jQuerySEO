@@ -1,6 +1,8 @@
 #ajax
 {
    border:1px solid red;
+   /*background:url("/Users/rahulsurvase/Desktop/google/img/loading1.gif") no-repeat right;*/
+
 
 }
 
@@ -8,7 +10,7 @@
 .srch-div
 
 {
-	z-index: 0;
+	z-index: 2;
 	position:relative;
 margin-left:30%;
 margin-top: 20%;
@@ -46,86 +48,35 @@ margin-bottom: -8px;
 
 	display: inline-block;
 }
-.button
+.butt
 {
 width: 124px;
     height: 60px;
-    font-size: 15px;
+    font-size: 20px;
 border-radius: 6px;
-    border: none;
-    background-color: #efefef;
-}
+    border: 1px
+background-color:#efefef;
 
-.sbdd_b
+}
+.butt:hover
 {
-	background: #fff;
-    border: 1px solid #ccc;
-    border-top-color: #d9d9d9;
+	border:1px;
 
-
-    cursor: default;
-}
-
-.sbsb_a
-{
-
-	background:#fff; 
-}
-
-
-.sbsb_b
-{
-list-style-type: none;
-margin: 0;
-padding:0;
+     
+	border-color: black;
 
 }
 
-.sbsb_c
-{
-line-height: 22px;
-overflow: hidden;
-padding: 0 10px;
 
-}
-
-.gsfs
-{
-
-	font:16px arial, sans-serif;
-}
 
 div
 {
 	display:block;
 }
 
-.sbsb_c
-{
-line-height: 22px;
 
 
-}
 
-.sbsb_c[dir=ltr] .sbqs_a
-{
-
-float:right;
-
-}
-
-.sbqs_c
-{
-word-wrap: break-word;
-
-}
-
-.gstl_0
-{
-    margin-left: 30%;
-    margin-right: 33%;
-
-}
 
 
 
@@ -134,7 +85,7 @@ word-wrap: break-word;
 
 list-style-type: none;
 
-margin-right: 20%;
+margin-right: 48%;
 font-family: serif;
 
 }
@@ -143,12 +94,13 @@ font-family: serif;
 {
 	padding: 3px;
     font-size: 19px;
+    z-index:0;
 
 }
 li.searchopts:hover
 {
 
-	background-color: #efefef;
+	background-color: #efefef  !important;
 }
 
 #info
@@ -161,6 +113,7 @@ display: none;
 {
 	 font-size: 2em;
 	 padding: 6px;
+	 z-index: 1;
 }
 
 .info-ul
@@ -170,7 +123,13 @@ display: inline-block;
     margin-left: 20px;
     list-style: none;
     width: 56%;
+    z-index: 0;
 
+}
+#ajax:hover
+{
+
+	border-color: black;
 }
 /*.title-class
 {
@@ -232,102 +191,49 @@ width:18%;
 
 
 }
+#load
+{
+position: fixed;
+  left: 63%;
+  bottom: 55%;
+  z-index: 9999;
 
 
+}
+.hidden
+{
 
+	display: none;
+}
+.hidden1
+{
+display:none;
 
+}
 
+#giff
+{
+	max-width: 43px;
+}
 
+#load1
+{
 
+	    position:fixed;
+    left: 48%;
+    bottom: 40%;
 
 
 
+}
 
+ #gif
+{
 
+   max-width: 43PX;
+   /*max-height: 50PX;*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

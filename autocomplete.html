@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>auto complete</title>
+    <title>auto-complete</title>
     <link rel="stylesheet" type="text/css" href="/Users/rahulsurvase/Desktop/html/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/Users/rahulsurvase/Desktop/google/css/gglstyle.css">
 </head>
@@ -9,12 +9,21 @@
 <body class="b">
     <div class="srch-div">
         <input type="text" id="ajax" class="text"  placeholder="Search..." name="search_box" />
+
+        <input type="button" id="btn" class="butt" value="Search" onclick="req_for_btn()" />
         <!-- <datalist id="json-datalist"></datalist>-->
+        <div id="load" class="hidden"><img src="/Users/rahulsurvase/Desktop/google/img/loading.gif" id="giff" /></div>
         <ul id="newUl"></ul>
 
     </div>
 
+    <!--<div id="load1"><img src="/Users/rahulsurvase/Desktop/google/img/loading.gif" id="gif"/></div>-->
+
+     
+<div id="load1" class="hidden1"><img src="/Users/rahulsurvase/Desktop/google/img/loading.gif" id="gif"/></div>        
     <div id="info"> 
+
+
     <img src="/Users/rahulsurvase/Downloads/poster.jpg" id="poster" class="inline-poster" alt="poster not availabale" />
     <ul class="info-ul">
     <li><p  class="title-class info-class">Title:<span id="title" >&nbsp&nbsp&nbsp&nbsp</span> </p></li>

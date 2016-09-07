@@ -27,27 +27,13 @@ else
 
 // window.onload=function() // use this to execute the following code without an error
 // {
-
-
 document.getElementById("ajax").addEventListener("keyup", load, false);
-   
-
-
-
-
-
-
 // }
 var counter =1;
 function load(event) {
 
-  // alert(2233);
+var key = event.keyCode;
 
-   //document.getElementById("load1").style.visibility="visible"; 
-
-    var i, j,k,l,m;
-    
-    var key = event.keyCode;
      console.log(key);
 
     if (key == 37 || key == 39 || key == 32)
@@ -103,7 +89,7 @@ function load(event) {
 
 
 
-if(key == 40 || key == 38){
+ if(key == 40 || key == 38){
   console.log("***************************************"+ key);
 
 
@@ -120,10 +106,7 @@ if(key == 40 || key == 38){
           {
           counter=1;
           }
-
           
-           
-           
           var liID= ul_child[counter].id;
           var liText= ul_child[counter].innerHTML;
             
@@ -255,7 +238,7 @@ if(key == 40 || key == 38){
             // Parse the JSON
             document.getElementById("load").setAttribute("class", "hidden");
             
-            document.getElementById("newUl").innerHTML = " ";
+            document.getElementById("newUl").innerHTML = " ";   // to stop repeated results
            // console.log("hello",demo[3]);            
             var jsonObj = JSON.parse(xhr.responseText);
 

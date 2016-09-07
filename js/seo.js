@@ -56,21 +56,56 @@ function load(event) {
 
   if (key ==8)
   {
-
+  document.getElementById("no_result").style.display="none";
   document.getElementById("info").style.display="none";
 
   }
 
 
-if(document.getElementsByTagName("type").value==null && (key==40 || key==38) )
+/*if(document.getElementsByTagName("type").value==null & key==40)
 {
   return;
 }
+*/
 
-else{
+/*if(key == 40)
+      {
+     //console.log(key);
+      var ul_child = document.getElementById("newUl").childNodes;
+      console.log("length is",ul_child.length,ul_child);
+         
+         if( ul_child != null){
+          var liID= ul_child[counter].id;
 
-  if(key == 40 || key == 38){
+          console.log("li ID",liID);
+         
+         document.getElementById(liID).style.backgroundColor="#efefef";
+         console.log(document.getElementById(liID));
+         counter++;
+         
+         for(var i =1 ; i<counter; i++)
+          {
+          console.log("for loop executing");
+          document.getElementById(ul_child[i].id).style.backgroundColor = "white";
+          }
+        
+         if (counter==ul_child.length)
+         {
+          counter=1;
+
+          
+         }
+       // if(key)
+        return;
+       }
+     }
+     */
+
+
+
+if(key == 40 || key == 38){
   console.log("***************************************"+ key);
+
 
   
   
@@ -125,15 +160,12 @@ else{
         
     }
 
-
-
-
-
     if (key==38)
     {    
+      var ul_child = document.getElementById("newUl").childNodes;
       console.log("jst entered in 38");
             if(counter==0 )
-            { 
+            {
               console.log("now the counter is",counter);
               counter=ul_child.length;
               return;
@@ -141,7 +173,7 @@ else{
     console.log("key 38 counter",counter);
         //document.getElementsById(liID).style.backgroundColor="red";
 
-           counter=counter-1;
+          counter=counter-1;
           var liID= ul_child[counter].id;
           var liText= ul_child[counter].innerHTML;
           
@@ -183,7 +215,6 @@ else{
     }
 
 }
-}
 
 
 
@@ -197,30 +228,6 @@ else{
 
 }
 
-
-        
-      
-    
- /* if(key == 38)
-  {   
-    console.log("up key pressed", counter);
-      if(counter==1)
-      {
-        counter=ul_child.length;
-
-        console.log("seted the value counter after pressing 38",counter);
-      }
-    document.getElementsById(ul_child[counter].id).style.backgroundColor="#efefef";
-    counter--;
-    console.log(counter);
-
-
-  }*/
-
-
-
-
-   
   //var dataList = document.getElementById("json-datalist");
    
     var input = document.getElementById("ajax");
@@ -238,8 +245,8 @@ else{
 
    xhr.send();
 
-    document.getElementById("load").removeAttribute("class") ;
-    
+    document.getElementById("load").removeAttribute("class");
+    document.getElementById("no_result").innerHTML="";
 
     // Handle state changes for the request
     xhr.onreadystatechange = function() {
@@ -280,7 +287,7 @@ else{
                   newUl[0].appendChild(newLi);           
                   //newUl.appendChild(newLi);                  not working
                    
-
+            document.getElementById("no_result").style.display="none";
             }
 
 
@@ -294,6 +301,12 @@ else{
                 input.placeholder = "Search...";
             }
         } // xhr.readystate==4  if block closed line 62
+        else{
+            document.getElementById("no_result").style.display="block";
+           document.getElementById("no_result").innerHTML="NO RESULT FOUND..";
+
+        }
+
     }; // onreadystate change = function() closed here line no:  61
 
 

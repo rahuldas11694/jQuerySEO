@@ -114,7 +114,7 @@ display: none;
 	 font-size: 2em;
 	 padding: 6px;
 	 z-index: 1;
-}
+	}
 
 .info-ul
 {
@@ -183,6 +183,20 @@ position: relative;
 
 
 }*/
+
+#no_result
+{
+    text-align: center;
+    font-size: 2em;
+    background-color: #efefef;
+    display: none;
+    margin-left: 30%;
+    margin-right: 33.11%;
+
+
+
+}
+
 
 
 #poster

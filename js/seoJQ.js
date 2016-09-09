@@ -89,13 +89,20 @@ console.log(key);
 
      return;
     }
-if(key==13)
+
+
+} //end of key==40 || key==38
+
+  if(key==13)
 {
-
-
+console.log("^^^^^KEY 13^^^^^^^^",counter);
+doStuff_for_li(counter);
+return;
 }
 
-}
+
+
+
 /*******************************************************************************/
 var input = $("#ajax");
 
@@ -108,11 +115,11 @@ $.ajax({
   async: true,
   dataType: "json",
   success: function (data) {
-  console.log("ajax data",data);		
+  //console.log("ajax data",data);		
 // $("#newUl").innerHTML=" ";  in jq use val() instead of innerhtml
 
 $("#newUl").html(" ");
-console.log("2");
+
 
     for (var obj in data.Search)
            { 
@@ -132,8 +139,10 @@ console.log("2");
   }
     //Do stuff with the JSON data
 });
+
+
 /*********************************************************************************/
-   });//end of keyup:
+});//end of keyup:
 
 function doStuff()
 {
@@ -167,6 +176,124 @@ function doStuff()
 }
 });
 }
+
+
+//$("#newUl").html("");
+function doStuff_for_li(counter)
+{
+console.log("9999888887776665443321122345667889",counter)
+
+var ul_child=$("#newUl").children();
+console.log("jzfbzhdjzcz ahc cbxz zczhjc ",ul_child);
+
+var liId =ul_child[counter-1].id;
+var liText=ul_child[counter-1].innerHTML;
+console.log("ID ",liId,"Text",liText);
+
+$("#newUl").html("");
+
+
+$.ajax(
+{
+type:"GET", url:"http://www.omdbapi.com/?", data:"i="+liId, async:true,
+dataType:"json",
+success:function(data)
+{
+console.log("000000000000000",data);
+$("#rated").html(data.Rated);
+      console.log(data.Rated);
+        $("#poster").attr("src",data.Poster);  // to use when u have img tag in ur DOM to show img 
+        $("#title").html(data.Title);
+        $("#year").html(data.Year);
+        $("#rating").html(data.imdbRating);
+        console.log(data.imdbRating)
+        $("#plot").html(data.Plot);
+        $("#info").css({"display":"block"});
+
+}
+
+});
+}
+
+
+/*function req_for_btn()
+{
+
+  console.log("butto getting clicked")
+}
+*/
+
+$("#btn").click(function()
+{
+
+  console.log("heloo world");
+
+   var input = $("#ajax").val();
+   console.log(input);
+   $("#newUl").html(" ");
+   $.ajax(
+    {
+    type:"GET",
+    url:"http://www.omdbapi.com/?",
+    data:"s="+input,
+    async:true,
+    dataType:"json",
+    success:function(data)
+    {
+      console.log(data.Search[0].imdbID);
+      var btn_id= data.Search[0].imdbID;
+      $.ajax(
+            {
+              type:"GET", 
+              url:"http://www.omdbapi.com/?", 
+              data:"i="+btn_id, 
+              async:true, 
+              dataType:"json",
+
+              success:function(data)
+              {
+               console.log("hello hello",data);
+        $("#rated").html(data.Rated);
+        console.log(data.Rated);
+        $("#poster").attr("src",data.Poster);  // to use when u have img tag in ur DOM to show img 
+        $("#title").html(data.Title);
+        $("#year").html(data.Year);
+        $("#rating").html(data.imdbRating);
+        console.log(data.imdbRating)
+        $("#plot").html(data.Plot);
+        $("#info").css({"display":"block"});
+
+               
+
+
+
+              }
+
+            }
+        );
+      
+
+
+
+    }
+
+
+
+    }
+    );
+
+
+
+}
+
+  );
+
+
+
+
+
+
+
         
 
 

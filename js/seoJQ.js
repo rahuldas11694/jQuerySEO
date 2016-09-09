@@ -12,6 +12,8 @@ $(document).ready(function() {
         if (key == 8) {
 
             $("#info").css({ "display": "none" });
+            $("#no_result").css({"display":"none"});
+
 
         }
 
@@ -63,6 +65,7 @@ $(document).ready(function() {
                     {
                         console.log(" COLOR CHANGE");
                         ul_child.eq(ul_child.length - 1).css({ "backgroundColor": "white" });
+                        ul_child.eq(counter).css({ "backgroundColor": "#efefef" });
 
                     }
 
@@ -138,9 +141,9 @@ $(document).ready(function() {
 
         var text = $("#ajax").val();
 
-        $("#info").css({"display":"none"});
-         
-        counter=0;
+        $("#info").css({ "display": "none" });
+
+        counter = 0;
 
         $.ajax({
             type: "GET",
@@ -151,13 +154,17 @@ $(document).ready(function() {
             async: true,
             dataType: "json",
             success: function(data) {
-                //console.log("ajax data",data);    
+                console.log("ajax data",data); 
+                
+
                 // $("#newUl").innerHTML=" ";  in jq use val() instead of innerhtml
 
                 $("#newUl").html(" ");
 
 
+
                 for (var obj in data.Search) {
+
 
                     var newLi = $("#newUl").append($("<li>" + data.Search[obj].Title + "</li>").attr("class", "searchopts list").attr("id", data.Search[obj].imdbID));
 
@@ -165,14 +172,23 @@ $(document).ready(function() {
                     //$(".searchopts").attr("id",data.Search[obj].imdbID); if you use this then it will apply same id to all the elements bcz last value is 10
                     //console.log(" for loop id",data.Search[obj].imdbID)
                 }
+                if(data.Response=="False"){
+                  $("#no_result").css({"display":"block"});
+                  return false;
+                }
+
+
                 $("#newUl li").click(function() //calling func in jQ
                     {
                         doStuff();
                     }
                 );
 
-            }
+            },
         });
+        
+
+
         /*********************************************************************************/
     }); //end of keyup:
 
@@ -181,6 +197,8 @@ $(document).ready(function() {
         console.log("....clicked getting executed......", event.target.innerHTML, "jnkzcz", event.target.id);
 
         var mvid = event.target.id;
+        var mvText = event.target.innerHTML;
+        $("#ajax").val(mvText); //not html() bcz its inputbox-- it must have value. inner text is invalid 
 
         $("#newUl").html("");
 
@@ -206,9 +224,13 @@ $(document).ready(function() {
                 $("#rating").html(data.imdbRating);
                 console.log(data.imdbRating)
                 $("#plot").html(data.Plot);
-                //$("#info").css({"display":"none"});
+                $("#info").css({ "display": "block" });
             }
+
         });
+
+
+
     }
 
 
